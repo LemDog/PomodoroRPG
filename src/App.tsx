@@ -35,6 +35,10 @@ function App() {
         }
     };
 
+    if (!hero) {
+        return <div style={{ padding: '20px' }}>Loading Game Data...</div>;
+    }
+
     return (
         <div className="layout" style={{ backgroundImage: 'none', backgroundColor: '#e0e0e0', padding: '20px', height: '100vh', boxSizing: 'border-box', overflow: 'hidden' }}>
             <div style={{ display: 'flex', gap: '20px', height: 'calc(100% - 180px)' }}>

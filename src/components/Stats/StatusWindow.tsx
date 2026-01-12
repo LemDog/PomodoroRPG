@@ -10,6 +10,10 @@ interface StatusWindowProps {
 export const StatusWindow: React.FC<StatusWindowProps> = ({ hero, onAllocateStat }) => {
     const stats = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 
+    if (!hero || !hero.derived || !hero.stats) {
+        return <Window title="Status" width="300px">Loading...</Window>;
+    }
+
     return (
         <Window title={`Status - ${hero.name}`} width="300px">
             <div style={{ marginBottom: '10px' }}>
