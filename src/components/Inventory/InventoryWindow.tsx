@@ -18,8 +18,8 @@ export const InventoryWindow: React.FC<InventoryWindowProps> = ({ items, onUseIt
         <Window title="Inventory" width="250px">
             <div className="ro-grid">
                 {slots.map((item, index) => (
-                    <div
-                        key={item.id === `empty-${index}` ? `empty-${index}` : item.id}
+                    <div 
+                        key={item.id === `empty-${index}` ? `empty-${index}` : item.id} 
                         className="ro-item-slot"
                         title={item.quantity > 0 ? `${item.name}\n${item.description}\nQty: ${item.quantity}` : ''}
                         onClick={() => item.quantity > 0 && item.type === 'USABLE' && onUseItem(item.id)}

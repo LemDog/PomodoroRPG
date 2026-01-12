@@ -51,20 +51,20 @@ export class GameService {
     private calculateDerivedStats() {
         const stats = this.state.hero.stats;
         const derived = this.state.hero.derived;
-
+        
         // RO Formulas (Approximate)
         const baseHp = 35 + this.state.hero.level * 5;
         const baseSp = 10 + this.state.hero.level * 1;
 
         derived.maxHp = Math.floor(baseHp * (1 + stats.vit * 0.01));
         derived.maxSp = Math.floor(baseSp * (1 + stats.int * 0.01));
-
+        
         derived.atk = stats.str + Math.floor(stats.str / 10) * Math.floor(stats.str / 10) + Math.floor(stats.dex / 5) + Math.floor(stats.luk / 5);
         derived.matk = stats.int + Math.floor(stats.int / 7) * Math.floor(stats.int / 7);
-
+        
         derived.def = stats.vit; // Soft DEF
         derived.mdef = stats.int + Math.floor(stats.vit / 2); // Soft MDEF
-
+        
         derived.hit = this.state.hero.level + stats.dex;
         derived.flee = this.state.hero.level + stats.agi;
         derived.crit = 1 + stats.luk * 0.3;
@@ -121,7 +121,7 @@ export class GameService {
         if (this.state.timer.timeLeft % 6 === 0) { // Every 6 seconds
             const hpRegen = Math.max(1, Math.floor(this.state.hero.stats.vit / 5) + Math.floor(this.state.hero.derived.maxHp / 200));
             this.state.hero.derived.hp = Math.min(this.state.hero.derived.maxHp, this.state.hero.derived.hp + hpRegen);
-
+            
             const spRegen = Math.max(1, Math.floor(this.state.hero.stats.int / 6) + Math.floor(this.state.hero.derived.maxSp / 100));
             this.state.hero.derived.sp = Math.min(this.state.hero.derived.maxSp, this.state.hero.derived.sp + spRegen);
         }
@@ -152,7 +152,7 @@ export class GameService {
         ];
         const event = events[Math.floor(Math.random() * events.length)];
         this.state.currentAction = event.text;
-
+        
         if (event.hp) {
              this.state.hero.derived.hp = Math.min(this.state.hero.derived.maxHp, Math.max(0, this.state.hero.derived.hp + event.hp));
         }
@@ -167,12 +167,12 @@ export class GameService {
             this.state.hero.currentXp -= this.state.hero.requiredXp;
             this.state.hero.requiredXp = Math.floor(this.state.hero.requiredXp * 1.5);
             this.state.hero.statPoints += 3; // Standard RO stat points per level (approx)
-
+            
             // Full heal on level up
             this.calculateDerivedStats();
             this.state.hero.derived.hp = this.state.hero.derived.maxHp;
             this.state.hero.derived.sp = this.state.hero.derived.maxSp;
-
+            
             this.addLog(`Level Up! You are now level ${this.state.hero.level}. gained 3 stat points.`);
         }
     }
@@ -229,7 +229,7 @@ export class GameService {
         const itemIndex = this.state.hero.inventory.findIndex(i => i.id === itemId);
         if (itemIndex > -1) {
             const item = this.state.hero.inventory[itemIndex];
-
+            
             if (item.type === 'USABLE' && item.effect) {
                 if (item.effect.type === 'HEAL_HP') {
                     this.state.hero.derived.hp = Math.min(this.state.hero.derived.maxHp, this.state.hero.derived.hp + item.effect.value);
@@ -238,7 +238,7 @@ export class GameService {
                     this.state.hero.derived.sp = Math.min(this.state.hero.derived.maxSp, this.state.hero.derived.sp + item.effect.value);
                     this.addLog(`Used ${item.name}, recovered ${item.effect.value} SP`);
                 }
-
+                
                 item.quantity -= 1;
                 if (item.quantity <= 0) {
                     this.state.hero.inventory.splice(itemIndex, 1);

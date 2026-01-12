@@ -13,14 +13,23 @@ export function useGameLoop() {
     });
 
     useEffect(() => {
+        if (!window.electronAPI) {
+            console.error("electronAPI is not available");
+            return;
+        }
+
         // Initial fetch
         window.electronAPI.getState().then((state: GameState) => {
-            setGameState(state);
-        });
+            if (state && state.hero) {
+                setGameState(state);
+            }
+        }).catch(err => console.error("Failed to get initial state:", err));
 
         // Subscribe to updates
         const removeListener = window.electronAPI.onStateUpdate((_event: any, state: GameState) => {
-            setGameState(state);
+            if (state && state.hero) {
+                setGameState(state);
+            }
         });
 
         return () => {

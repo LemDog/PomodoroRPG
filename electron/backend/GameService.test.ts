@@ -52,9 +52,9 @@ describe('GameService', () => {
     it('should stop game correctly and apply penalty', () => {
         gameService.startGame();
         vi.advanceTimersByTime(5000);
-
+        
         const initialHp = gameService.getState().hero.derived.hp;
-
+        
         gameService.stopGame();
 
         const state = gameService.getState();
@@ -83,23 +83,23 @@ describe('GameService', () => {
     it('should use items correctly', () => {
         // Manually add an item
         const potion = { id: 'red_potion', name: 'Red Potion', type: 'USABLE' as const, description: 'Restores HP.', effect: { type: 'HEAL_HP' as const, value: 45 }, quantity: 1 };
-        // We need to access private state or just assume we can get loot.
+        // We need to access private state or just assume we can get loot. 
         // Let's force add it by hacking the state via a public method if possible, or just mocking loot gen.
         // Actually, we can just modify the state returned by getState? No, it returns a ref so it might work but it's hacky.
         // Better: trigger a loot event or mocking.
-        // For now, let's just rely on logic verification.
+        // For now, let's just rely on logic verification. 
         // Wait, I can use `debugAddXp` to level up and maybe I can implement a `debugAddItem`?
         // Or I can just check the logic by simulation.
-
+        
         // Let's skip complex item setup in this unit test unless I add a debug add item method.
         // I'll rely on the code review for item usage, or add a debug method.
     });
-
+    
     it('should generate loot on session completion', () => {
         gameService.startGame();
         // Fast forward to end
         vi.advanceTimersByTime(25 * 60 * 1000 + 1000);
-
+        
         const state = gameService.getState();
         expect(state.timer.isActive).toBe(false);
         // Can't guarantee loot, but can check log

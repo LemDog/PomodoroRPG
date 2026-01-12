@@ -10,6 +10,10 @@ interface StatusWindowProps {
 export const StatusWindow: React.FC<StatusWindowProps> = ({ hero, onAllocateStat }) => {
     const stats = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 
+    if (!hero || !hero.derived || !hero.stats) {
+        return <Window title="Status" width="300px">Loading...</Window>;
+    }
+
     return (
         <Window title={`Status - ${hero.name}`} width="300px">
             <div style={{ marginBottom: '10px' }}>
@@ -20,8 +24,8 @@ export const StatusWindow: React.FC<StatusWindowProps> = ({ hero, onAllocateStat
                 <div className="ro-stat-row">
                     <span>HP:</span>
                     <div className="ro-bar-container" style={{ width: '150px' }}>
-                        <div
-                            className="ro-bar ro-hp-bar"
+                        <div 
+                            className="ro-bar ro-hp-bar" 
                             style={{ width: `${(hero.derived.hp / hero.derived.maxHp) * 100}%` }}
                         ></div>
                         <span style={{ position: 'absolute', top: '-1px', left: '4px', fontSize: '9px', color: 'black' }}>
@@ -32,8 +36,8 @@ export const StatusWindow: React.FC<StatusWindowProps> = ({ hero, onAllocateStat
                 <div className="ro-stat-row">
                     <span>SP:</span>
                     <div className="ro-bar-container" style={{ width: '150px' }}>
-                        <div
-                            className="ro-bar ro-sp-bar"
+                        <div 
+                            className="ro-bar ro-sp-bar" 
                             style={{ width: `${(hero.derived.sp / hero.derived.maxSp) * 100}%` }}
                         ></div>
                         <span style={{ position: 'absolute', top: '-1px', left: '4px', fontSize: '9px', color: 'black' }}>
@@ -57,8 +61,8 @@ export const StatusWindow: React.FC<StatusWindowProps> = ({ hero, onAllocateStat
                             <span style={{ textTransform: 'uppercase', width: '30px' }}>{stat}</span>
                             <span style={{ width: '20px', textAlign: 'right' }}>{hero.stats[stat]}</span>
                             {hero.statPoints > 0 && (
-                                <button
-                                    className="ro-button"
+                                <button 
+                                    className="ro-button" 
                                     style={{ padding: '0px 2px', marginLeft: '5px' }}
                                     onClick={() => onAllocateStat(stat)}
                                 >+</button>
