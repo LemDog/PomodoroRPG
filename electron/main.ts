@@ -91,6 +91,16 @@ ipcMain.handle('game:debugTriggerEvent', () => {
     return gameService.getState();
 });
 
+ipcMain.handle('game:allocateStat', (_, stat) => {
+    gameService.allocateStat(stat);
+    return gameService.getState();
+});
+
+ipcMain.handle('game:useItem', (_, itemId) => {
+    gameService.useItem(itemId);
+    return gameService.getState();
+});
+
 app.on('ready', createWindow)
 
 app.on('will-quit', () => {

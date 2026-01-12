@@ -1,0 +1,106 @@
+:root {
+  --ro-bg-color: #f0f0f0;
+  --ro-window-bg: #e6e6e6;
+  --ro-window-border-light: #ffffff;
+  --ro-window-border-dark: #808080;
+  --ro-title-bg: #a6c0e6;
+  --ro-title-text: #000000;
+  --ro-text-color: #000000;
+  --ro-hp-color: #ff9999;
+  --ro-sp-color: #9999ff;
+  --ro-button-bg: #d4d0c8;
+}
+
+.ro-window {
+  background-color: var(--ro-window-bg);
+  border: 2px solid;
+  border-color: var(--ro-window-border-light) var(--ro-window-border-dark) var(--ro-window-border-dark) var(--ro-window-border-light);
+  font-family: 'Tahoma', sans-serif;
+  font-size: 12px;
+  color: var(--ro-text-color);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+
+.ro-title-bar {
+  background-color: var(--ro-title-bg);
+  padding: 2px 5px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+}
+
+.ro-content {
+  padding: 10px;
+}
+
+.ro-button {
+  background-color: var(--ro-button-bg);
+  border: 1px solid;
+  border-color: var(--ro-window-border-light) var(--ro-window-border-dark) var(--ro-window-border-dark) var(--ro-window-border-light);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 2px 6px;
+}
+
+.ro-button:active {
+  border-color: var(--ro-window-border-dark) var(--ro-window-border-light) var(--ro-window-border-light) var(--ro-window-border-dark);
+}
+
+.ro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+    gap: 2px;
+}
+
+.ro-item-slot {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #999;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.ro-item-slot:hover {
+    background-color: #eee;
+}
+
+.ro-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.ro-bar-container {
+    width: 100%;
+    background-color: #333;
+    height: 10px;
+    border: 1px solid #000;
+    margin-bottom: 2px;
+    position: relative;
+}
+
+.ro-bar {
+    height: 100%;
+    transition: width 0.2s;
+}
+
+.ro-hp-bar { background-color: var(--ro-hp-color); }
+.ro-sp-bar { background-color: var(--ro-sp-color); }
+
+.ro-log-container {
+    height: 150px;
+    overflow-y: auto;
+    background-color: rgba(255,255,255,0.8);
+    border: 1px inset #999;
+    padding: 5px;
+    font-family: monospace;
+}
