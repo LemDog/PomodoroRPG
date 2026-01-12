@@ -1,0 +1,37 @@
+{
+  "name": "pomodoro-rpg",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && tsup && electron-builder",
+    "build:main": "tsup",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "electron": "wait-on tcp:5173 && concurrently -k \"tsup --watch\" \"electron .\"",
+    "start": "concurrently -k \"npm run dev\" \"npm run electron\"",
+    "test": "vitest",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^25.2.0",
+    "electron-builder": "^24.4.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vitest": "^4.0.16",
+    "wait-on": "^7.0.1"
+  }
+}

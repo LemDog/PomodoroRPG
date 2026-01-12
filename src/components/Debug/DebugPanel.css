@@ -1,0 +1,32 @@
+.debug-panel {
+    border: 1px dashed var(--accent-warning);
+    background: rgba(241, 196, 15, 0.05);
+}
+
+.debug-panel h4 {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--accent-warning);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.debug-controls {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.debug-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-warning);
+    color: var(--accent-warning);
+    font-size: var(--font-size-sm);
+    padding: 0.4em 0.8em;
+}
+
+.debug-btn:hover {
+    background-color: var(--accent-warning);
+    color: var(--bg-primary);
+}
